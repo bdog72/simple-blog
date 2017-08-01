@@ -113,7 +113,7 @@ const production = {
 
 module.exports = merge.smart(
   process.env.npm_lifecycle_event === 'build'
-  ? production
-  : development,
+    ? production
+    : development,
   common
 )
