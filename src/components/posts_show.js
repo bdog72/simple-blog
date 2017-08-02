@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost } from '../actions'
+import { fetchPost, deletePost } from '../actions'
 import { Link } from 'react-router-dom'
 
 class PostsShow extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.onDeleteClick = this.onDeleteClick.bind(this)
-  // }
+  constructor (props) {
+    super(props)
+    this.onDeleteClick = this.onDeleteClick.bind(this)
+  }
 
   componentDidMount () {
     const { id } = this.props.match.params
     this.props.fetchPost(id)
   }
 
-  // onDeleteClick () {
-  //   const { id } = this.props.match.params
-  //   this.props.deletePost(id, () => {
-  //     this.props.history.push('/')
-  //   })
-  // }
+  onDeleteClick () {
+    const { id } = this.props.match.params
+    this.props.deletePost(id, () => {
+      this.props.history.push('/')
+    })
+  }
 
   render () {
     const { post } = this.props
@@ -30,12 +30,14 @@ class PostsShow extends Component {
     return (
       <div>
         <Link to='/'>Back To Index</Link>
-        {/* <button
-          className='btn btn-danger pull-xs-right'
-          onClick={this.onDeleteClick}
-        >
-          Delete Post
-        </button> */}
+        <div className='text-center'>
+          <button
+            className='btn btn-danger pull-xs-right'
+            onClick={this.onDeleteClick}
+          >
+            Delete Post
+          </button>
+        </div>
         <h3>{post.title}</h3>
         <h6>Categories: {post.categories}</h6>
         <p>{post.content}</p>
@@ -48,4 +50,4 @@ function mapStateToProps ({ posts }, ownProps) {
   return { post: posts[ownProps.match.params.id] }
 }
 
-export default connect(mapStateToProps, { fetchPost })(PostsShow)
+export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow)
