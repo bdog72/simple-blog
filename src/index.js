@@ -10,6 +10,7 @@ import promise from 'redux-promise'
 import App from './components/App'
 import reducers from './reducers'
 import Postsnew from './components/posts_new'
+import PostsShow from './components/posts_show'
 import './styles/screen.scss'
 
 const root = document.getElementById('root')
@@ -29,6 +30,7 @@ render(
       <div>
         <Switch>
           <Route path='/posts/new' component={Postsnew} />
+          <Route path='/posts/:id' component={PostsShow} />
           <Route path='/' component={App} />
         </Switch>
       </div>
